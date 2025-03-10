@@ -1,5 +1,5 @@
 export const CONFIG_API = {
   AUTH: {
-    INDEX: process.env.API_URL,
+    INDEX: process.env.NEXT_PUBLIC_API_URL_ORG,
   },
 };
