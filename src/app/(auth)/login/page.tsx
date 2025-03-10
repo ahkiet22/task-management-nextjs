@@ -1,11 +1,12 @@
 "use client";
 
 import { fetchData } from "@/utils/fetch";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { EMAIL_REG, PASSWORD_REG } from "@/configs/regex";
 import { TUserLogin } from "@/types/auth.type";
 import Link from "next/link";
 import { FaFacebook, FaGithub, FaGoogle } from "react-icons/fa";
+import { useRouter } from "next/router";
 
 interface TUserLoginResponse {
   data: string;
@@ -13,6 +14,7 @@ interface TUserLoginResponse {
 
 export default function Login() {
   const [data, setData] = useState<unknown | null>(null);
+  const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,6 +47,13 @@ export default function Login() {
       }
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      router.back();
+    }
+  }, [router]);
 
   return (
     <div className="bg-gradient-to-r from-blue-500 to-purple-500 w-full h-screen flex items-center justify-center py-12">
